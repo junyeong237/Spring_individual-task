@@ -14,8 +14,9 @@ import java.util.List;
 public class MemoService {
 
     @Autowired
-    private MemoRepository memoRepository;
+    MemoRepository memoRepository;
 
+    @Autowired
     public MemoService(MemoRepository memoRepository){
 
         this.memoRepository = memoRepository;

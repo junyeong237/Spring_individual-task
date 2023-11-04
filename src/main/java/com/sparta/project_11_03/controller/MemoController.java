@@ -30,17 +30,17 @@ public class MemoController {
         return "memos/createMemo";
     }
 
-    @PostMapping("/mymemos/create")
-    @ResponseBody
-    public MemoResponseDto createMemo(@RequestBody MemoRequestDto requestDto) {
-        return memoService.createMemo(requestDto);
-    }
-
-   // @PostMapping("/mymemos/create")
-//    public String createMemo(@RequestBody MemoRequestDto requestDto) {
-//        memoService.createMemo(requestDto);
-//        return "redirect:/";
+//    @PostMapping("/mymemos/create")
+//    @ResponseBody
+//    public MemoResponseDto createMemo(@RequestBody MemoRequestDto requestDto) {
+//        return memoService.createMemo(requestDto);
 //    }
+
+    @PostMapping("/mymemos/create")
+    public String createMemo(@RequestBody MemoRequestDto requestDto) {
+        memoService.createMemo(requestDto);
+        return "redirect:/";
+    }
 
 
 //
@@ -57,7 +57,7 @@ public class MemoController {
     public String getMemoList(Model model) {
         List<Memo> members = memoService.getMemoList();
         model.addAttribute("members", members);
-        return "members/memosList";
+        return "memos/memosList";
     }
 
     @GetMapping("/mymemos/{id}")
@@ -69,11 +69,11 @@ public class MemoController {
     }
 
     @PutMapping("/mymemos/{id}")
-    @ResponseBody
-    public void updateMemo(@PathVariable Long id, @RequestBody MemoRequestDto requestDto) {
+    //@ResponseBody
+    public String updateMemo(@PathVariable Long id, @RequestBody MemoRequestDto requestDto) {
         // 해당 메모가 DB에 존재하는지 확인
         memoService.updateMemo(id,requestDto);
-
+        return "redirect:/";
 
     }
 
