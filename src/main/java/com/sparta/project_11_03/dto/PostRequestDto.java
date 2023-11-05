@@ -19,6 +19,7 @@ public class PostRequestDto {
     private String password;
 
     private String contents;
+    private String title;
 
     //private LocalDate date;
 

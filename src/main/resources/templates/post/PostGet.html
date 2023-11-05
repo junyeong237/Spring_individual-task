@@ -9,6 +9,7 @@
       <tr>
         <th style="width: 100px">No</th>
         <th style="width: 100px">이름</th>
+          <th style="width: 100px">제목</th>
         <th style="width: 250px">내용</th>
         <th style="width: 100px"></th>
       </tr>
@@ -17,6 +18,7 @@
       <tr>
         <td style="width: 100px; text-align: center" th:text="${post.id}"></td>
         <td style="width: 100px; text-align: center" th:text="${post.username}">이름</td>
+          <td style="width: 100px; text-align: center" th:text="${post.title}">제목</td>
         <td style="width: 250px; text-align: center" th:text="${post.contents}">내용</td>
         <td style="width: 100px; text-align: center">
           <form th:action="@{'/mypost/' + ${post.id} + '?password=' + ${post.password}}" th:method="delete">

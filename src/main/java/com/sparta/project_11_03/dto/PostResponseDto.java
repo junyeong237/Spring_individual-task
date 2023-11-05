@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,6 +22,9 @@ public class PostResponseDto {
     private String password;
 
     private String contents;
+    private String title;
+    private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
 
     //private LocalDate date;
     public PostResponseDto(Post post) {
@@ -26,6 +32,9 @@ public class PostResponseDto {
         this.username = post.getUsername();
         this.password = post.getPassword();
         this.contents = post.getContents();
+        this.title = post.getTitle();
+        this.createdAt = post.getCreatedAt();
+        this.modifiedAt = post.getModifiedAt();
     }
 
 }

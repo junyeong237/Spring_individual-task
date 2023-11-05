@@ -41,7 +41,7 @@ public class PostController {
     @PostMapping("/mypost/create")
     public String createPost(@RequestBody PostRequestDto requestDto) {
         postService.createPost(requestDto);
-        return "home";
+        return "home"; //post라 이런건가?
     }
 
 
@@ -77,13 +77,13 @@ public class PostController {
 //        return "home";
 //    }
 //
-    @PutMapping("/post/{id}")
+    @PutMapping("/mypost/{id}")
     //@ResponseBody // 이거 필수인가? 몰겄네
     public ResponseEntity<String> updatePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto){
         return postService.updatePost(id,requestDto);
     }
 
-    @DeleteMapping("/post/{id}")
+    @DeleteMapping("/mypost/{id}")
     //@ResponseBody
     public ResponseEntity<String> deletePost(@PathVariable Long id,@RequestParam String password) {
         return postService.deletePost(id,password);

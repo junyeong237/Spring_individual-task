@@ -26,12 +26,12 @@ public class PostService {
 
     }
 
-    public PostResponseDto createPost(PostRequestDto requestDto) {
+    public void createPost(PostRequestDto requestDto) {
 
         Post post = new Post(requestDto);
         Post savePost = postRepository.save(post);
         PostResponseDto postResponseDto = new PostResponseDto(savePost);
-        return postResponseDto;
+        //return postResponseDto;
     }
 
     public List<Post> getPostList(){

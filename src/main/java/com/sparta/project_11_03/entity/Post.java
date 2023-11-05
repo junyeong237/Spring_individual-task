@@ -15,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "post")
 
-public class Post {
+public class Post extends Timestamped{
 
     @Getter
     @Id
@@ -27,6 +27,8 @@ public class Post {
     private String password;
     @Column(name = "contents", nullable = false)
     private String contents;
+    @Column(name = "title", nullable = false)
+    private String title;
 
 
     //private LocalDate date;
@@ -37,6 +39,7 @@ public class Post {
         this.username = postRequestDto.getUsername();
         this.password = postRequestDto.getPassword();
         this.contents = postRequestDto.getContents();
+        this.title = postRequestDto.getTitle();
 
 
     }
@@ -51,6 +54,7 @@ public class Post {
             this.username = postRequestDto.getUsername();
             this.password = postRequestDto.getPassword();
             this.contents = postRequestDto.getContents();
+            this.title = postRequestDto.getTitle();
 
     }
 
