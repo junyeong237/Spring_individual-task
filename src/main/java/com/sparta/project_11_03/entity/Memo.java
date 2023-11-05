@@ -9,7 +9,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
+import java.nio.file.AccessDeniedException;
 import java.time.LocalDate;
 
 @Entity
@@ -51,10 +54,10 @@ public class Memo {
 
     public void update(MemoRequestDto memoRequestDto){
 
-        this.id = memoRequestDto.getId();
-        this.username = memoRequestDto.getUsername();
-        this.password = memoRequestDto.getPassword();
-        this.contents = memoRequestDto.getContents();
+            this.id = memoRequestDto.getId();
+            this.username = memoRequestDto.getUsername();
+            this.password = memoRequestDto.getPassword();
+            this.contents = memoRequestDto.getContents();
 
     }
 

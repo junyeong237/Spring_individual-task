@@ -5,10 +5,12 @@ import com.sparta.project_11_03.dto.MemoResponseDto;
 import com.sparta.project_11_03.entity.Memo;
 import com.sparta.project_11_03.service.MemoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 
@@ -24,9 +26,12 @@ public class MemoController {
         this.memoService = memoService;
 
     }
-
+    @GetMapping(value = "/mymemos")
+    public String startView(){
+        return "home";
+    }
     @GetMapping(value = "/mymemos/create")
-    public String startView() {
+    public String createView() {
         return "memos/createMemo";
     }
 
@@ -39,7 +44,7 @@ public class MemoController {
     @PostMapping("/mymemos/create")
     public String createMemo(@RequestBody MemoRequestDto requestDto) {
         memoService.createMemo(requestDto);
-        return "redirect:/";
+        return "home";
     }
 
 
@@ -53,7 +58,7 @@ public class MemoController {
 //
 //    }
 
-    @GetMapping(value = "/mymemos")
+    @GetMapping(value = "/mymemos/get")
     public String getMemoList(Model model) {
         List<Memo> members = memoService.getMemoList();
         model.addAttribute("members", members);
@@ -61,27 +66,29 @@ public class MemoController {
     }
 
     @GetMapping("/mymemos/{id}")
-    @ResponseBody
-    public void getMemo(@PathVariable Long id){
+    public String getMemo(@PathVariable Long id, Model model){
 
-        memoService.getMemo(id);
-
+        Memo members = memoService.getMemo(id);
+        model.addAttribute("members", members);
+        return "memos/memosGet";
     }
 
+//    @PutMapping("/mymemos/{id}")
+//    //@ResponseBody
+//    public String updateMemo(@PathVariable Long id, @RequestBody MemoRequestDto requestDto) throws AccessDeniedException {
+//        memoService.updateMemo(id,requestDto);
+//        return "home";
+//    }
+//
     @PutMapping("/mymemos/{id}")
-    //@ResponseBody
-    public String updateMemo(@PathVariable Long id, @RequestBody MemoRequestDto requestDto) {
-        // 해당 메모가 DB에 존재하는지 확인
-        memoService.updateMemo(id,requestDto);
-        return "redirect:/";
-
+    @ResponseBody // 이거 필수인가? 몰겄네
+    public ResponseEntity<String> updatePost(@PathVariable Long id, @RequestBody MemoRequestDto requestDto){
+        return memoService.updatePost(id,requestDto);
     }
 
     @DeleteMapping("/mymemos/{id}")
     @ResponseBody
-    public Long deleteMemo(@PathVariable Long id) {
-        return memoService.deleteMemo(id);
-
+    public ResponseEntity<String> deleteMemo(@PathVariable Long id,@RequestParam String password) {
+        return memoService.deletePost(id,password);
     }
-
 }

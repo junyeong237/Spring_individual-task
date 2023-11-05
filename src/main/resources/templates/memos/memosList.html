@@ -7,16 +7,18 @@
         <table>
             <thead>
             <tr>
-                <th>#</th>
-                <th>이름</th>
+                <th style="width: 200px">링크</th>
+                <th style="width: 100px">번호</th>
+                <th style="width: 100px">이름</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="member : ${members}">
-                <td th:text="${member.id}"></td>
-                <td th:text="${member.username}"></td>
-                <td th:text="${member.password}"></td>
-                <td th:text="${member.contents}"></td>
+                <td style="width: 200px; text-align: center">
+                    <a th:href="@{/mymemos/{memberId}(memberId=${member.id})}">해당게시글로 이동</a>
+                </td>
+                <td style="width: 100px; text-align: center" th:text="${member.id}">1</td>
+                <td style="width: 100px; text-align: center" th:text="${member.username}">이름</td>
             </tr>
             </tbody>
         </table>
