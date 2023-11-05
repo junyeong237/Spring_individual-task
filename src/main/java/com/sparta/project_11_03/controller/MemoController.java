@@ -15,7 +15,6 @@ import java.util.List;
 
 
 @Controller
-//@RequestMapping("/api")
 public class MemoController {
 
     @Autowired
@@ -81,13 +80,13 @@ public class MemoController {
 //    }
 //
     @PutMapping("/mymemos/{id}")
-    @ResponseBody // 이거 필수인가? 몰겄네
+    //@ResponseBody // 이거 필수인가? 몰겄네
     public ResponseEntity<String> updatePost(@PathVariable Long id, @RequestBody MemoRequestDto requestDto){
         return memoService.updatePost(id,requestDto);
     }
 
     @DeleteMapping("/mymemos/{id}")
-    @ResponseBody
+    //@ResponseBody
     public ResponseEntity<String> deleteMemo(@PathVariable Long id,@RequestParam String password) {
         return memoService.deletePost(id,password);
     }
