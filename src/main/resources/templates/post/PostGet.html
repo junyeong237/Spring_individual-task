@@ -15,11 +15,11 @@
       </thead>
       <tbody>
       <tr>
-        <td style="width: 100px; text-align: center" th:text="${members.id}"></td>
-        <td style="width: 100px; text-align: center" th:text="${members.username}">이름</td>
-        <td style="width: 250px; text-align: center" th:text="${members.contents}">내용</td>
+        <td style="width: 100px; text-align: center" th:text="${post.id}"></td>
+        <td style="width: 100px; text-align: center" th:text="${post.username}">이름</td>
+        <td style="width: 250px; text-align: center" th:text="${post.contents}">내용</td>
         <td style="width: 100px; text-align: center">
-          <form th:action="@{'/mymemos/' + ${members.id} + '?password=' + ${members.password}}" th:method="delete">
+          <form th:action="@{'/mypost/' + ${post.id} + '?password=' + ${post.password}}" th:method="delete">
 <!--            기본적으로 form 태그에서는 post와 get밖에 지원안하지만 hidden input이라 th를 사용하면 delete도 사용가능하다카더라-->
             <button type="submit">삭제</button>
           </form>

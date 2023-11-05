@@ -1,18 +1,16 @@
 package com.sparta.project_11_03.dto;
 
+import com.sparta.project_11_03.entity.Post;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class MemoRequestDto {
+public class PostResponseDto {
 
     private Long id;
 
@@ -23,6 +21,11 @@ public class MemoRequestDto {
     private String contents;
 
     //private LocalDate date;
-
+    public PostResponseDto(Post post) {
+        this.id = post.getId();
+        this.username = post.getUsername();
+        this.password = post.getPassword();
+        this.contents = post.getContents();
+    }
 
 }
