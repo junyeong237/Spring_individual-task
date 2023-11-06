@@ -4,12 +4,14 @@ import com.sparta.project_11_03.dto.PostRequestDto;
 import com.sparta.project_11_03.dto.PostResponseDto;
 import com.sparta.project_11_03.entity.Post;
 import com.sparta.project_11_03.service.PostService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -24,6 +26,13 @@ public class PostController {
         this.postService = postService;
 
     }
+
+    @GetMapping("/")
+    public String home(){
+
+        return "index";
+    }
+
     @GetMapping("/mypost")
     public String startView(){
         return "index";
@@ -33,12 +42,17 @@ public class PostController {
         return "post/createPost";
     }
 
+
+
     @PostMapping("/mypost/create")
     @ResponseBody
-    public String createPost(@RequestBody PostRequestDto requestDto) {
+    public void createPost(@RequestBody PostRequestDto requestDto, HttpServletResponse response) throws IOException {
         postService.createPost(requestDto);
-        return "index";
+        response.sendRedirect("/");
+        //return "index";
     }
+
+
 
 
     @GetMapping("/mypost/get")
