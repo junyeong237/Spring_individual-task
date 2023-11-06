@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <div class="container">
-    <div class="form-group">
+    <form th:action = "@{'/mypost/' + ${postId}}" th:method="put">
         <label for="username">이름</label>
         <input type="text" id="username" name="username" placeholder="이름을 입력하세요">
         <br>
@@ -15,44 +15,9 @@
         <br>
         <label for="contents">내용</label>
         <input type="text" id="contents" name="contents" placeholder="내용을 입력하세요">
-    </div>
-    <button type="button" onclick="submitForm()">수정등록</button>
+    <button type="submit">수정등록</button>
+    </form>
     <a href="/">처음으로 돌아가기</a>
 </div> <!-- /container -->
-
-<div id="resultMessage"></div>
 </body>
 </html>
-
-
-<script th:inline="javascript">
-
-    var postId = /*[[${postId}]]*/ null; // Thymeleaf 표현식으로 postId 값을 가져옵니다.
-    function submitForm() {
-        var formData = {
-            id : postId,
-            username: document.getElementById('username').value,
-            password: document.getElementById('password').value,
-            title: document.getElementById('title').value,
-            contents: document.getElementById('contents').value
-        };
-
-        var finalUrl = '/mypost/' + postId
-        var xhr = new XMLHttpRequest();
-        xhr.open('PUT', finalUrl, true);
-        xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
-                var resultMessage = document.getElementById('resultMessage');
-                if (xhr.status === 200) {
-                    resultMessage.innerHTML = '수정 성공'; // 결과 메시지를 화면에 표시
-                } else {
-                    resultMessage.innerHTML = '수정 실패'; // 에러 메시지를 화면에 표시
-                }
-            }
-        };
-
-        xhr.send(JSON.stringify(formData));
-    }
-</script>

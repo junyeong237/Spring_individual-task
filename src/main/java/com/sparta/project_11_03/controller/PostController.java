@@ -27,12 +27,6 @@ public class PostController {
 
     }
 
-    @GetMapping("/")
-    public String home(){
-
-        return "index";
-    }
-
     @GetMapping("/mypost")
     public String startView(){
         return "index";
@@ -42,16 +36,11 @@ public class PostController {
         return "post/createPost";
     }
 
-
-
     @PostMapping("/mypost/create")
-    @ResponseBody
-    public void createPost(@RequestBody PostRequestDto requestDto, HttpServletResponse response) throws IOException {
+    public String createPost(@ModelAttribute PostRequestDto requestDto){ //@requestBody면 적용안됨..
         postService.createPost(requestDto);
-        response.sendRedirect("/mymemos");
-        //return "index";
+        return "index";
     }
-
 
 
 
@@ -79,7 +68,8 @@ public class PostController {
 
     @PutMapping("/mypost/{id}")
     //@ResponseBody // 이거 필수인가? 모르겄네
-    public ResponseEntity<String> updatePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto){
+    public ResponseEntity<String> updatePost(@PathVariable Long id, @ModelAttribute PostRequestDto requestDto){
+        System.out.println("전송성공");
         return postService.updatePost(id,requestDto);
     }
 
