@@ -1,6 +1,7 @@
 package com.sparta.project_11_03.controller;
 
 import com.sparta.project_11_03.dto.PostRequestDto;
+import com.sparta.project_11_03.dto.PostResponseDto;
 import com.sparta.project_11_03.entity.Post;
 import com.sparta.project_11_03.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,39 +24,24 @@ public class PostController {
         this.postService = postService;
 
     }
-    @GetMapping(value = "/mypost")
+    @GetMapping("/mypost")
     public String startView(){
-        return "home";
+        return "index";
     }
-    @GetMapping(value = "/mypost/create")
+    @GetMapping("/mypost/create")
     public String createView() {
         return "post/createPost";
     }
 
-//    @PostMapping("/mymemos/create")
-//    @ResponseBody
-//    public MemoResponseDto createMemo(@RequestBody MemoRequestDto requestDto) {
-//        return memoService.createMemo(requestDto);
-//    }
-
     @PostMapping("/mypost/create")
+    @ResponseBody
     public String createPost(@RequestBody PostRequestDto requestDto) {
         postService.createPost(requestDto);
-        return "home"; //post라 이런건가?
+        return "index";
     }
 
 
-//
-//
-//    @GetMapping("/mymemos")
-//    @ResponseBody
-//    public List<Memo> getMemoList(){
-//
-//        return memoService.getMemoList();
-//
-//    }
-
-    @GetMapping(value = "/mypost/get")
+    @GetMapping("/mypost/get")
     public String getPostList(Model model) {
         List<Post> posts = postService.getPostList();
         model.addAttribute("posts", posts);
@@ -70,15 +56,15 @@ public class PostController {
         return "post/postGet";
     }
 
-//    @PutMapping("/mymemos/{id}")
-//    //@ResponseBody
-//    public String updateMemo(@PathVariable Long id, @RequestBody MemoRequestDto requestDto) throws AccessDeniedException {
-//        memoService.updateMemo(id,requestDto);
-//        return "home";
-//    }
-//
+    @GetMapping("/mypost/update/{id}") //값수정하는 html로
+    //@ResponseBody // 이거 필수인가? 모르겄네
+    public String inputUpdatePost(@PathVariable Long id, Model model){
+        model.addAttribute("postId",id);
+        return "post/updatePost";
+    }
+
     @PutMapping("/mypost/{id}")
-    //@ResponseBody // 이거 필수인가? 몰겄네
+    //@ResponseBody // 이거 필수인가? 모르겄네
     public ResponseEntity<String> updatePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto){
         return postService.updatePost(id,requestDto);
     }
@@ -87,5 +73,11 @@ public class PostController {
     //@ResponseBody
     public ResponseEntity<String> deletePost(@PathVariable Long id,@RequestParam String password) {
         return postService.deletePost(id,password);
+    }
+
+    @GetMapping("/mypost/inputpassword/{id}")
+    public String inputDeletePassword(@PathVariable Long id, Model model) {
+        model.addAttribute("postId",id);
+        return "post/inputPassword";
     }
 }

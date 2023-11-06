@@ -50,11 +50,12 @@ public class Post extends Timestamped{
 
     public void update(PostRequestDto postRequestDto){
 
-            this.id = postRequestDto.getId();
+            //this.id = postRequestDto.getId();
             this.username = postRequestDto.getUsername();
             this.password = postRequestDto.getPassword();
             this.contents = postRequestDto.getContents();
             this.title = postRequestDto.getTitle();
+
 
     }
 

@@ -14,8 +14,4 @@ public class Project1103Application {
 		SpringApplication.run(Project1103Application.class, args);
 	}
 
-	@Bean
-	public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
-		return new HiddenHttpMethodFilter();
-	}
 }

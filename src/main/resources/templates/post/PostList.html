@@ -9,22 +9,25 @@
             <tr>
                 <th style="width: 200px">링크</th>
                 <th style="width: 100px">번호</th>
-                <th style="width: 100px">이름</th>
                 <th style="width: 100px">제목</th>
+                <th style="width: 100px">이름</th>
+                <th style="width: 250px">수정일</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="post : ${posts}">
                 <td style="width: 200px; text-align: center">
-                    <a th:href="@{/mypost/{postId}(postId=${post.id})}">해당게시글로 이동</a>
+                    <a th:href="@{'/mypost/' + ${post.id}}">해당게시글로 이동</a>
                 </td>
                 <td style="width: 100px; text-align: center" th:text="${post.id}"></td>
-                <td style="width: 100px; text-align: center" th:text="${post.username}">이름</td>
                 <td style="width: 100px; text-align: center" th:text="${post.title}">제목</td>
+                <td style="width: 100px; text-align: center" th:text="${post.username}">이름</td>
+                <td style="width: 250px; text-align: center" th:text="${post.createdAt}">작성일</td>
 
             </tr>
             </tbody>
         </table>
+        <a href="/">처음으로 돌아가기</a>
     </div>
 </div> <!-- /container -->
 </body>

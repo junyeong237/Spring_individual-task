@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -35,7 +36,10 @@ public class PostService {
     }
 
     public List<Post> getPostList(){
-        return postRepository.findAll();
+
+        List<Post> posts = postRepository.findAll();
+        posts.sort(Comparator.comparing(Post::getCreatedAt).reversed()); // 내림차순 정렬
+        return posts;
     }
 
     @Transactional //transactional 전파해야되기때문에 transactional 걸어줘야함

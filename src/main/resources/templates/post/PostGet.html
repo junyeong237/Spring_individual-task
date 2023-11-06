@@ -11,7 +11,9 @@
         <th style="width: 100px">이름</th>
           <th style="width: 100px">제목</th>
         <th style="width: 250px">내용</th>
+          <th style="width: 100px"></th>
         <th style="width: 100px"></th>
+
       </tr>
       </thead>
       <tbody>
@@ -21,10 +23,19 @@
           <td style="width: 100px; text-align: center" th:text="${post.title}">제목</td>
         <td style="width: 250px; text-align: center" th:text="${post.contents}">내용</td>
         <td style="width: 100px; text-align: center">
-          <form th:action="@{'/mypost/' + ${post.id} + '?password=' + ${post.password}}" th:method="delete">
-<!--            기본적으로 form 태그에서는 post와 get밖에 지원안하지만 hidden input이라 th를 사용하면 delete도 사용가능하다카더라-->
-            <button type="submit">삭제</button>
-          </form>
+<!--          <form th:action="@{'/mypost/' + ${post.id} + '?password=' + ${post.password}}" th:method="delete">-->
+<!--&lt;!&ndash;            기본적으로 form 태그에서는 post와 get밖에 지원안하지만 hidden input이라 th를 사용하면 delete도 사용가능하다카더라&ndash;&gt;-->
+<!--            <button type="submit">삭제</button>-->
+<!--          </form>-->
+<!--            <a href = "inputPassword.html">삭제</a> 이거 왜 안되냐-->
+            <form th:action="@{'/mypost/update/' + ${post.id}}">
+                <button type="submit">수정</button>
+            </form>
+            <form th:action="@{'/mypost/inputpassword/' + ${post.id}}">
+                <button type="submit">삭제</button>
+            </form>
+            <a href="/">처음으로 돌아가기</a>
+
         </td>
       </tr>
       </tbody>
