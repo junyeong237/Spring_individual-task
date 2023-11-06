@@ -48,7 +48,7 @@ public class PostController {
     @ResponseBody
     public void createPost(@RequestBody PostRequestDto requestDto, HttpServletResponse response) throws IOException {
         postService.createPost(requestDto);
-        response.sendRedirect("/");
+        response.sendRedirect("/mymemos");
         //return "index";
     }
 
