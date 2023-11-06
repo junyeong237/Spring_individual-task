@@ -37,14 +37,14 @@ public class PostController {
     }
 
     @PostMapping("/mypost/create")
-    public String createPost(@ModelAttribute PostRequestDto requestDto){ //@requestBody면 적용안됨..
+    public String createPost(@ModelAttribute PostRequestDto requestDto){
         postService.createPost(requestDto);
         return "index";
     }
 
 
 
-    @GetMapping("/mypost/get")
+    @GetMapping("/mypost/get") //게시글 전체 리스트
     public String getPostList(Model model) {
         List<Post> posts = postService.getPostList();
         model.addAttribute("posts", posts);
@@ -60,28 +60,27 @@ public class PostController {
     }
 
     @GetMapping("/mypost/update/{id}") //값수정하는 html로
-    //@ResponseBody // 이거 필수인가? 모르겄네
     public String inputUpdatePost(@PathVariable Long id, Model model){
         model.addAttribute("postId",id);
         return "post/updatePost";
     }
-
+    @GetMapping("/mypost/inputpassword/{id}")
+    public String inputDeletePassword(@PathVariable Long id, Model model) {
+        model.addAttribute("postId",id);
+        return "post/inputPassword";
+    }
     @PutMapping("/mypost/{id}")
-    //@ResponseBody // 이거 필수인가? 모르겄네
+    @ResponseBody // 이거 필수인가? 모르겄네
     public ResponseEntity<String> updatePost(@PathVariable Long id, @ModelAttribute PostRequestDto requestDto){
         System.out.println("전송성공");
         return postService.updatePost(id,requestDto);
     }
 
     @DeleteMapping("/mypost/{id}")
-    //@ResponseBody
+    @ResponseBody
     public ResponseEntity<String> deletePost(@PathVariable Long id,@RequestParam String password) {
         return postService.deletePost(id,password);
     }
 
-    @GetMapping("/mypost/inputpassword/{id}")
-    public String inputDeletePassword(@PathVariable Long id, Model model) {
-        model.addAttribute("postId",id);
-        return "post/inputPassword";
-    }
+
 }
